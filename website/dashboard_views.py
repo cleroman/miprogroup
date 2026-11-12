@@ -1,5 +1,6 @@
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from .models import SiteSettings, Service, Partner, ProjectRequest, News, TeamMember
@@ -84,10 +85,17 @@ class ServiceDeleteView(StaffRequiredMixin, DeleteView):
         return self.post(request, *args, **kwargs)
         
     def post(self, request, *args, **kwargs):
-        messages.success(self.request, "Le service a été supprimé.")
-        return super().post(request, *args, **kwargs)
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        try:
+            if self.object.image:
+                self.object.image.delete(save=False)
+        except Exception:
+            pass
+        self.object.delete()
+        messages.success(self.request, "Le service a ete supprime.")
+        return HttpResponseRedirect(success_url)
 
-# --- PARTENAIRES ---
 class PartnerListView(StaffRequiredMixin, ListView):
     model = Partner
     template_name = 'website/dashboard/partner_list.html'
@@ -131,10 +139,17 @@ class PartnerDeleteView(StaffRequiredMixin, DeleteView):
         return self.post(request, *args, **kwargs)
         
     def post(self, request, *args, **kwargs):
-        messages.success(self.request, "Le partenaire a été supprimé.")
-        return super().post(request, *args, **kwargs)
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        try:
+            if self.object.logo:
+                self.object.logo.delete(save=False)
+        except Exception:
+            pass
+        self.object.delete()
+        messages.success(self.request, "Le partenaire a ete supprime.")
+        return HttpResponseRedirect(success_url)
 
-# --- DEMANDES DE PROJET ---
 class RequestListView(StaffRequiredMixin, ListView):
     model = ProjectRequest
     template_name = 'website/dashboard/request_list.html'
@@ -180,6 +195,18 @@ class TeamDeleteView(StaffRequiredMixin, DeleteView):
     
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
+        
     def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        try:
+            if self.object.image:
+                self.object.image.delete(save=False)
+            if self.object.cv:
+                self.object.cv.delete(save=False)
+        except Exception:
+            pass
+        self.object.delete()
         messages.success(self.request, "Le membre a ete supprime.")
-        return super().post(request, *args, **kwargs)
+        return HttpResponseRedirect(success_url)
+
