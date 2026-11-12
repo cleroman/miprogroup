@@ -171,7 +171,7 @@
             <div class="about-content">
                 <div class="about-image">
                     {% if ceo and ceo.image %}
-                        <img src="{{ ceo.image.url }}" alt="{{ ceo.name }}">
+                        {% if ceo.image %}<img src="{{ ceo.image.url }}" alt="{{ ceo.name }}">{% else %}<img src="{% static 'img/armel dibwe.PNG' %}" alt="{{ ceo.name }}">{% endif %}
                     {% else %}
                         <div style="width:100%; height:100%; background:#e2e8f0; display:flex; align-items:center; justify-content:center; color:#94a3b8;">Photo non disponible</div>
                     {% endif %}
@@ -212,7 +212,7 @@
                 {% for exec in executives %}
                 <div class="expertise-card" style="max-width: 380px; padding: 30px; text-align: center;">
                     {% if exec.image %}
-                        <img src="{{ exec.image.url }}" style="width: 160px; height: 160px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; display: block; border: 4px solid var(--primary-blue);">
+                        {% if exec.image %}<img src="{{ exec.image.url }}" style="width: 160px; height: 160px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; display: block; border: 4px solid var(--primary-blue);">{% else %}<img src="{% static 'img/responsable.PNG' %}" style="width: 160px; height: 160px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; display: block; border: 4px solid var(--primary-blue);">{% endif %}
                     {% else %}
                         <div style="width:160px; height:160px; border-radius:50%; background:#e2e8f0; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; color:#94a3b8;"><i class="fas fa-user" style="font-size:3rem;"></i></div>
                     {% endif %}
@@ -253,7 +253,7 @@
                     {% for member in team_members %}
                     <div class="partner-logo" style="flex-direction: column; height: auto; padding: 20px; width: 220px;">
                         {% if member.image %}
-                            <img src="{{ member.image.url }}" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 15px;">
+                            {% if member.image %}<img src="{{ member.image.url }}" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 15px;">{% else %}<img src="{% static 'img/responsable.PNG' %}" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 15px;">{% endif %}
                         {% else %}
                             <div style="width:80px; height:80px; border-radius:50%; background:#e2e8f0; margin-bottom:15px; display:flex; align-items:center; justify-content:center; color:#94a3b8;"><i class="fas fa-user"></i></div>
                         {% endif %}
@@ -270,7 +270,7 @@
                     {% for member in team_members %}
                     <div class="partner-logo" style="flex-direction: column; height: auto; padding: 20px; width: 220px;">
                         {% if member.image %}
-                            <img src="{{ member.image.url }}" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 15px;">
+                            {% if member.image %}<img src="{{ member.image.url }}" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 15px;">{% else %}<img src="{% static 'img/responsable.PNG' %}" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 15px;">{% endif %}
                         {% else %}
                             <div style="width:80px; height:80px; border-radius:50%; background:#e2e8f0; margin-bottom:15px; display:flex; align-items:center; justify-content:center; color:#94a3b8;"><i class="fas fa-user"></i></div>
                         {% endif %}
