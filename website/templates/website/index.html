@@ -290,7 +290,11 @@
                 {% for service in services %}
                 <div class="expertise-card">
                     {% if service.image %}
-                        <img src="{{ service.image.url }}?f_auto,q_auto" alt="{{ service.title }}" class="expertise-img">
+                        {% if forloop.counter == 1 %}<img src="{% static 'img/premier panneau.PNG' %}" alt="Energies" class="expertise-img">
+                    {% elif forloop.counter == 2 %}<img src="{% static 'img/deuxieme photo.PNG' %}" alt="BTP" class="expertise-img">
+                    {% elif forloop.counter == 3 %}<img src="{% static 'img/troiseme photo.PNG' %}" alt="IT" class="expertise-img">
+                    {% elif forloop.counter == 4 %}<img src="{% static 'img/quatrieme photo.PNG' %}" alt="Commerce" class="expertise-img">
+                    {% else %}<img src="{% static 'img/premier panneau.PNG' %}" alt="Service" class="expertise-img">{% endif %}
                     {% else %}
                         <div class="expertise-img" style="display:flex; align-items:center; justify-content:center; color:#999;">Photo à ajouter via l'admin</div>
                     {% endif %}
@@ -307,13 +311,7 @@
     <section class="section-padding about" id="apropos">
         <div class="container">
             <div class="about-content">
-                <div class="about-image">
-                    {% if ceo and ceo.image %}
-                        <img src="{% static 'img/armel dibwe.PNG' %}?f_auto,q_auto" alt="{{ ceo.name }}">
-                    {% else %}
-                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="CEO MIPROgroup">
-                    {% endif %}
-                </div>
+                <div class="about-image"><img src="{% static \'img/armel dibwe.PNG\' %}" alt="Armel Dibwe"></div>
                 <div class="about-text">
                     <h2>Une Direction Technique d'Excellence</h2>
                     <p>MIPROgroup SARLU est une entreprise de droit congolais, immatriculée au RCCM de Kinshasa. Fondée en 2021 et basée à la Gombe, notre mission est d'accompagner la transformation énergétique et infrastructurelle de la RDC.</p>
@@ -396,7 +394,12 @@
                         {% if partner.website %}
                         <a href="{{ partner.website }}" target="_blank" rel="noopener noreferrer" class="partner-logo">
                             {% if partner.logo %}
-                                <img src="{{ partner.logo.url }}?f_auto,q_auto" alt="{{ partner.name }}">
+                                {% if "SOGETECH" in partner.name %}<img src="{% static 'img/sogetec.PNG' %}" alt="{{ partner.name }}">
+                            {% elif "FETERA" in partner.name %}<img src="{% static 'img/fetera.PNG' %}" alt="{{ partner.name }}">
+                            {% elif "JINKO" in partner.name %}<img src="{% static 'img/jinko.PNG' %}" alt="{{ partner.name }}">
+                            {% elif "LONGi" in partner.name %}<img src="{% static 'img/longi.png' %}" alt="{{ partner.name }}">
+                            {% elif "MEUBLIK" in partner.name %}<img src="{% static 'img/meublik.jpeg' %}" alt="{{ partner.name }}">
+                            {% else %}<span style="font-weight:bold; color: var(--dark-blue);">{{ partner.name }}</span>{% endif %}
                             {% else %}
                                 {{ partner.name }}
                             {% endif %}
@@ -437,7 +440,12 @@
                         {% if partner.website %}
                         <a href="{{ partner.website }}" target="_blank" rel="noopener noreferrer" class="partner-logo">
                             {% if partner.logo %}
-                                <img src="{{ partner.logo.url }}?f_auto,q_auto" alt="{{ partner.name }}">
+                                {% if "SOGETECH" in partner.name %}<img src="{% static 'img/sogetec.PNG' %}" alt="{{ partner.name }}">
+                            {% elif "FETERA" in partner.name %}<img src="{% static 'img/fetera.PNG' %}" alt="{{ partner.name }}">
+                            {% elif "JINKO" in partner.name %}<img src="{% static 'img/jinko.PNG' %}" alt="{{ partner.name }}">
+                            {% elif "LONGi" in partner.name %}<img src="{% static 'img/longi.png' %}" alt="{{ partner.name }}">
+                            {% elif "MEUBLIK" in partner.name %}<img src="{% static 'img/meublik.jpeg' %}" alt="{{ partner.name }}">
+                            {% else %}<span style="font-weight:bold; color: var(--dark-blue);">{{ partner.name }}</span>{% endif %}
                             {% else %}
                                 {{ partner.name }}
                             {% endif %}
