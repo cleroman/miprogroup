@@ -112,18 +112,42 @@ class ProjectRequest(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.domain}"
+
 class TeamMember(models.Model):
     name = models.CharField(max_length=100, verbose_name="Nom complet")
     role = models.CharField(max_length=100, verbose_name="Fonction / Role")
     image = models.ImageField(upload_to='team/', blank=True, null=True, verbose_name="Photo de profil")
-    details = models.TextField(verbose_name="Details / Biographie (diplomes, experience...)")
-    email = models.EmailField(blank=True, null=True, verbose_name="Email")
-    phone = models.CharField(max_length=50, blank=True, null=True, verbose_name="Telephone")
+    cv = models.FileField(upload_to='team/cv/', blank=True, null=True, verbose_name="CV (PDF)")
+    
+    details = models.TextField(verbose_name="Biographie / Details")
+    comments = models.TextField(blank=True, null=True, verbose_name="Commentaires / Citations")
+    
+    email1 = models.EmailField(blank=True, null=True, verbose_name="Email 1")
+    email2 = models.EmailField(blank=True, null=True, verbose_name="Email 2")
+    email3 = models.EmailField(blank=True, null=True, verbose_name="Email 3")
+    
+    phone1 = models.CharField(max_length=50, blank=True, null=True, verbose_name="Telephone 1")
+    phone2 = models.CharField(max_length=50, blank=True, null=True, verbose_name="Telephone 2")
+    phone3 = models.CharField(max_length=50, blank=True, null=True, verbose_name="Telephone 3")
+    
+    address1 = models.CharField(max_length=255, blank=True, null=True, verbose_name="Adresse 1")
+    address2 = models.CharField(max_length=255, blank=True, null=True, verbose_name="Adresse 2")
+    address3 = models.CharField(max_length=255, blank=True, null=True, verbose_name="Adresse 3")
+
     linkedin = models.URLField(blank=True, null=True, verbose_name="Lien LinkedIn")
-    is_ceo = models.BooleanField(default=False, verbose_name="Est-ce le CEO ?", help_text="Cocher pour l'afficher dans la section Direction.")
+    is_ceo = models.BooleanField(default=False, verbose_name="Est-ce le CEO ?")
     order = models.IntegerField(default=0, verbose_name="Ordre d'affichage")
 
     class Meta:
+        ordering = ['-is_ceo', 'order']
+        verbose_name = "Membre de l'equipe"
+        verbose_name_plural = "Membres de l'equipe"
+
+    def __str__(self):
+        return f"{self.name} - {self.role}"
+
+
+class Meta:
         ordering = ['-is_ceo', 'order']
         verbose_name = "Membre de l'equipe"
         verbose_name_plural = "Membres de l'equipe"
