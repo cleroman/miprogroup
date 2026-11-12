@@ -90,3 +90,8 @@ cloudinary.config(
     secure = True
 )
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
+# --- SECURITE RENDER ---
+CSRF_TRUSTED_ORIGINS = ['https://miprogroup.onrender.com']
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
