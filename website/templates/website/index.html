@@ -170,10 +170,8 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-image">
-                    {% if ceo and ceo.image %}
-                        {% if ceo.image %}<img src="{{ ceo.image.url }}" alt="{{ ceo.name }}">{% else %}<img src="{% static 'img/armel dibwe.PNG' %}" alt="{{ ceo.name }}">{% endif %}
-                    {% else %}
-                        <div style="width:100%; height:100%; background:#e2e8f0; display:flex; align-items:center; justify-content:center; color:#94a3b8;">Photo non disponible</div>
+                    <img src="{% static 'img/ceo.jpg' %}" alt="CEO MIPROgroup" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
                     {% endif %}
                 </div>
                 <div class="about-text">
