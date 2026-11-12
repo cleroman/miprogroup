@@ -1,8 +1,8 @@
 from django.db import models
 
 class SiteSettings(models.Model):
-    hero_title = models.CharField(max_length=200, default="Batir l avenir energetique et infrastructurel de la RDC")
-    hero_subtitle = models.TextField(default="De l ingenierie conseil a la realisation de projets BTP et Energies Renouvelables...")
+    hero_title = models.CharField(max_length=200, default="Bâtir l'avenir énergétique et infrastructurel de la RDC")
+    hero_subtitle = models.TextField(default="De l'ingénierie conseil à la réalisation de projets BTP et Énergies Renouvelables...")
     hero_video_url = models.URLField(default="https://cdn.pixabay.com/video/2022/07/12/124204-729684643_large.mp4")
     logo = models.ImageField(upload_to='site/', blank=True, null=True)
     
@@ -13,12 +13,11 @@ class SiteSettings(models.Model):
     phone2 = models.CharField(max_length=50, default="+243 997 278 348", blank=True)
     hours = models.CharField(max_length=100, default="Lundi - Vendredi : 8h00 - 17h00")
     
-    # --- NOUVEAUX CHAMPS RESEAUX SOCIAUX ---
     youtube_url = models.URLField(blank=True, null=True, verbose_name="Lien YouTube")
     tiktok_url = models.URLField(blank=True, null=True, verbose_name="Lien TikTok")
     instagram_url = models.URLField(blank=True, null=True, verbose_name="Lien Instagram")
     facebook_url = models.URLField(blank=True, null=True, verbose_name="Lien Facebook")
-    whatsapp_url = models.URLField(blank=True, null=True, verbose_name="Lien WhatsApp (ex: https://wa.me/243...)")
+    whatsapp_url = models.URLField(blank=True, null=True, verbose_name="Lien WhatsApp")
     linkedin_url = models.URLField(blank=True, null=True, verbose_name="Lien LinkedIn")
     
     rccm = models.CharField(max_length=100, default="CD/KNG/RCCM/21-B-01330")
@@ -139,15 +138,6 @@ class TeamMember(models.Model):
     order = models.IntegerField(default=0, verbose_name="Ordre d'affichage")
 
     class Meta:
-        ordering = ['-is_ceo', 'order']
-        verbose_name = "Membre de l'equipe"
-        verbose_name_plural = "Membres de l'equipe"
-
-    def __str__(self):
-        return f"{self.name} - {self.role}"
-
-
-class Meta:
         ordering = ['-is_ceo', 'order']
         verbose_name = "Membre de l'equipe"
         verbose_name_plural = "Membres de l'equipe"
