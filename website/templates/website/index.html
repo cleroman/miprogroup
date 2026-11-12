@@ -164,65 +164,124 @@
         </div>
     </section>
 
+    
+    <!-- SECTION CEO (DYNAMIQUE) -->
     <section class="section-padding about" id="apropos">
         <div class="container">
             <div class="about-content">
                 <div class="about-image">
-                    <img src="{% static 'img/armel dibwe.PNG' %}" alt="Armel Dibwe">
+                    {% if ceo and ceo.image %}
+                        <img src="{{ ceo.image.url }}" alt="{{ ceo.name }}">
+                    {% else %}
+                        <div style="width:100%; height:100%; background:#e2e8f0; display:flex; align-items:center; justify-content:center; color:#94a3b8;">Photo non disponible</div>
+                    {% endif %}
                 </div>
                 <div class="about-text">
                     <h2>Une Direction Technique d'Excellence</h2>
                     <p>MIPROgroup SARLU est une entreprise de droit congolais, immatriculée au RCCM de Kinshasa. Fondée en 2021 et basée à la Gombe, notre mission est d'accompagner la transformation énergétique et infrastructurelle de la RDC.</p>
+                    
+                    {% if ceo %}
                     <div class="ceo-badge">
-                        <h4>Armel Dibwe</h4>
-                        <p>CEO</p>
-                        <p style="margin-top: 8px; font-weight: 400; font-size: 0.85rem;">Ingénieur en construction né à MWENE DITU le 19-04-1991, etc vous pouvez le changer</p>
+                        <h4>{{ ceo.name }}</h4>
+                        <p style="color: var(--primary-blue); font-weight: 600;">{{ ceo.role }}</p>
+                        <p style="margin-top: 8px; font-weight: 400; font-size: 0.85rem;">{{ ceo.details|linebreaksbr }}</p>
                     </div>
+                    {% endif %}
+                    
                     <p>Cette triple compétence nous permet d'aborder vos projets avec une vision holistique : maîtrise technique des systèmes, optimisation des processus et respect des normes environnementales.</p>
                 </div>
             </div>
         </div>
     </section>
 
+
     
-    <!-- SECTION EQUIPE -->
+    
+
+    
+    <!-- SECTION DIRIGEANTS (PRESIDENT, CEO, DG) -->
+    {% if executives %}
+    <section class="section-padding" id="direction" style="background-color: var(--white);">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Notre Direction</h2>
+                <p>Les visages qui guident notre vision au quotidien.</p>
+            </div>
+            
+            <div class="expertise-grid" style="margin-top: 40px; justify-content: center;">
+                {% for exec in executives %}
+                <div class="expertise-card" style="max-width: 380px; padding: 30px; text-align: center;">
+                    {% if exec.image %}
+                        <img src="{{ exec.image.url }}" style="width: 160px; height: 160px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; display: block; border: 4px solid var(--primary-blue);">
+                    {% else %}
+                        <div style="width:160px; height:160px; border-radius:50%; background:#e2e8f0; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; color:#94a3b8;"><i class="fas fa-user" style="font-size:3rem;"></i></div>
+                    {% endif %}
+                    <h3>{{ exec.name }}</h3>
+                    <p style="color: var(--primary-blue); font-weight: 600; font-size: 1.1rem; margin-bottom: 15px;">{{ exec.role }}</p>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 15px;">{{ exec.details|truncatewords:20 }}</p>
+                    
+                    <div style="font-size: 0.85rem; color: var(--text-dark); text-align: left; margin-bottom: 15px;">
+                        {% if exec.email1 %}<div><i class="fas fa-envelope" style="color: var(--primary-blue); width: 20px;"></i> {{ exec.email1 }}</div>{% endif %}
+                        {% if exec.phone1 %}<div><i class="fas fa-phone" style="color: var(--primary-blue); width: 20px;"></i> {{ exec.phone1 }}</div>{% endif %}
+                    </div>
+                    
+                    <div style="margin-top: 20px; font-size: 1.2rem;">
+                        {% if exec.cv %}<a href="{{ exec.cv.url }}" target="_blank" style="color: var(--primary-blue); margin: 0 10px;" title="Télécharger le CV"><i class="fas fa-file-pdf"></i></a>{% endif %}
+                        {% if exec.linkedin %}<a href="{{ exec.linkedin }}" target="_blank" style="color: var(--primary-blue); margin: 0 10px;"><i class="fab fa-linkedin"></i></a>{% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- SECTION AUTRES MEMBRES (DEFILEMENT) -->
     {% if team_members %}
     <section class="section-padding" id="equipe" style="background-color: var(--light-gray);">
         <div class="container">
             <div class="text-center">
                 <h2 class="section-title">Notre Équipe</h2>
-                <p>Des experts passionnés au service de vos projets.</p>
+                <p>Découvrez les talents qui font avancer MIPROGROUP.</p>
             </div>
-            <div class="expertise-grid" style="margin-top: 40px;">
-                {% for member in team_members %}
-                <div class="expertise-card" style="padding: 30px; text-align: left;">
-                    {% if member.image %}
-                        <img src="{{ member.image.url }}" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; display: block; border: 3px solid var(--primary-blue);">
-                    {% endif %}
-                    <h3 style="text-align: center;">{{ member.name }}</h3>
-                    <p style="color: var(--primary-blue); font-weight: 600; text-align: center; margin-bottom: 15px;">{{ member.role }}</p>
-                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 15px;">{{ member.details|truncatewords:20 }}</p>
-                    
-                    {% if member.comments %}
-                        <p style="font-size: 0.85rem; font-style: italic; color: var(--text-muted); background: var(--surface); padding: 10px; border-radius: 5px;">"{{ member.comments }}"</p>
-                    {% endif %}
-
-                    <div style="font-size: 0.85rem; color: var(--text-dark); margin-top: 15px;">
-                        {% if member.email1 %}<div><i class="fas fa-envelope" style="color: var(--primary-blue); width: 20px;"></i> {{ member.email1 }}</div>{% endif %}
-                        {% if member.email2 %}<div><i class="fas fa-envelope" style="color: var(--primary-blue); width: 20px;"></i> {{ member.email2 }}</div>{% endif %}
-                        
-                        {% if member.phone1 %}<div><i class="fas fa-phone" style="color: var(--primary-blue); width: 20px;"></i> {{ member.phone1 }}</div>{% endif %}
-                        {% if member.phone2 %}<div><i class="fas fa-phone" style="color: var(--primary-blue); width: 20px;"></i> {{ member.phone2 }}</div>{% endif %}
-                        
-                        {% if member.address1 %}<div><i class="fas fa-map-marker-alt" style="color: var(--primary-blue); width: 20px;"></i> {{ member.address1 }}</div>{% endif %}
+        </div>
+        
+        <div class="partners-marquee-wrapper" style="margin-top: 30px;">
+            <div class="partners-marquee">
+                <!-- Piste 1 -->
+                <div class="partners-track">
+                    {% for member in team_members %}
+                    <div class="partner-logo" style="flex-direction: column; height: auto; padding: 20px; width: 220px;">
+                        {% if member.image %}
+                            <img src="{{ member.image.url }}" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 15px;">
+                        {% else %}
+                            <div style="width:80px; height:80px; border-radius:50%; background:#e2e8f0; margin-bottom:15px; display:flex; align-items:center; justify-content:center; color:#94a3b8;"><i class="fas fa-user"></i></div>
+                        {% endif %}
+                        <h4 style="font-family: var(--font-title); margin-bottom: 5px; font-size: 1rem;">{{ member.name }}</h4>
+                        <p style="color: var(--primary-blue); font-size: 0.8rem; font-weight: 600; text-align: center; margin-bottom: 10px;">{{ member.role }}</p>
+                        {% if member.cv %}
+                            <a href="{{ member.cv.url }}" target="_blank" style="font-size: 0.8rem; color: var(--text-muted);"><i class="fas fa-file-pdf"></i> CV</a>
+                        {% endif %}
                     </div>
-
-                    <div style="display: flex; gap: 15px; margin-top: 20px; justify-content: center; font-size: 1.2rem;">
-                        {% if member.cv %}<a href="{{ member.cv.url }}" target="_blank" style="color: var(--primary-blue);" title="Télécharger le CV"><i class="fas fa-file-pdf"></i></a>{% endif %}
-                        {% if member.linkedin %}<a href="{{ member.linkedin }}" target="_blank" style="color: var(--primary-blue);" title="LinkedIn"><i class="fab fa-linkedin"></i></a>{% endif %}
-                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
+                <!-- Piste 2 (Duplicata pour defilement infini) -->
+                <div class="partners-track">
+                    {% for member in team_members %}
+                    <div class="partner-logo" style="flex-direction: column; height: auto; padding: 20px; width: 220px;">
+                        {% if member.image %}
+                            <img src="{{ member.image.url }}" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 15px;">
+                        {% else %}
+                            <div style="width:80px; height:80px; border-radius:50%; background:#e2e8f0; margin-bottom:15px; display:flex; align-items:center; justify-content:center; color:#94a3b8;"><i class="fas fa-user"></i></div>
+                        {% endif %}
+                        <h4 style="font-family: var(--font-title); margin-bottom: 5px; font-size: 1rem;">{{ member.name }}</h4>
+                        <p style="color: var(--primary-blue); font-size: 0.8rem; font-weight: 600; text-align: center; margin-bottom: 10px;">{{ member.role }}</p>
+                        {% if member.cv %}
+                            <a href="{{ member.cv.url }}" target="_blank" style="font-size: 0.8rem; color: var(--text-muted);"><i class="fas fa-file-pdf"></i> CV</a>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </section>

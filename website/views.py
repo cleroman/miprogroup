@@ -26,14 +26,16 @@ def index(request):
     settings_obj = SiteSettings.objects.first()
     services = Service.objects.all()
     partners = Partner.objects.all()
-    ceo = TeamMember.objects.filter(is_ceo=True).first()
-    team_members = TeamMember.objects.filter(is_ceo=False)
+    ceo = TeamMember.objects.filter(role_type='CEO').first()
+    executives = TeamMember.objects.filter(role_type__in=['PRESIDENT', 'CEO', 'DG']).order_by('order')
+    team_members = TeamMember.objects.filter(role_type='MEMBER').order_by('order')
     
     context = {
         'settings': settings_obj,
         'services': services,
         'partners': partners,
         'ceo': ceo,
+        'executives': executives,
         'team_members': team_members,
     }
     return render(request, 'website/index.html', context)
