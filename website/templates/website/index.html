@@ -184,6 +184,50 @@
         </div>
     </section>
 
+    
+    <!-- SECTION EQUIPE -->
+    {% if team_members %}
+    <section class="section-padding" id="equipe" style="background-color: var(--light-gray);">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Notre Équipe</h2>
+                <p>Des experts passionnés au service de vos projets.</p>
+            </div>
+            <div class="expertise-grid" style="margin-top: 40px;">
+                {% for member in team_members %}
+                <div class="expertise-card" style="padding: 30px; text-align: left;">
+                    {% if member.image %}
+                        <img src="{{ member.image.url }}" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; display: block; border: 3px solid var(--primary-blue);">
+                    {% endif %}
+                    <h3 style="text-align: center;">{{ member.name }}</h3>
+                    <p style="color: var(--primary-blue); font-weight: 600; text-align: center; margin-bottom: 15px;">{{ member.role }}</p>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 15px;">{{ member.details|truncatewords:20 }}</p>
+                    
+                    {% if member.comments %}
+                        <p style="font-size: 0.85rem; font-style: italic; color: var(--text-muted); background: var(--surface); padding: 10px; border-radius: 5px;">"{{ member.comments }}"</p>
+                    {% endif %}
+
+                    <div style="font-size: 0.85rem; color: var(--text-dark); margin-top: 15px;">
+                        {% if member.email1 %}<div><i class="fas fa-envelope" style="color: var(--primary-blue); width: 20px;"></i> {{ member.email1 }}</div>{% endif %}
+                        {% if member.email2 %}<div><i class="fas fa-envelope" style="color: var(--primary-blue); width: 20px;"></i> {{ member.email2 }}</div>{% endif %}
+                        
+                        {% if member.phone1 %}<div><i class="fas fa-phone" style="color: var(--primary-blue); width: 20px;"></i> {{ member.phone1 }}</div>{% endif %}
+                        {% if member.phone2 %}<div><i class="fas fa-phone" style="color: var(--primary-blue); width: 20px;"></i> {{ member.phone2 }}</div>{% endif %}
+                        
+                        {% if member.address1 %}<div><i class="fas fa-map-marker-alt" style="color: var(--primary-blue); width: 20px;"></i> {{ member.address1 }}</div>{% endif %}
+                    </div>
+
+                    <div style="display: flex; gap: 15px; margin-top: 20px; justify-content: center; font-size: 1.2rem;">
+                        {% if member.cv %}<a href="{{ member.cv.url }}" target="_blank" style="color: var(--primary-blue);" title="Télécharger le CV"><i class="fas fa-file-pdf"></i></a>{% endif %}
+                        {% if member.linkedin %}<a href="{{ member.linkedin }}" target="_blank" style="color: var(--primary-blue);" title="LinkedIn"><i class="fab fa-linkedin"></i></a>{% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
     <section class="section-padding partners" id="partenaires">
         <div class="container">
             <div class="text-center">
