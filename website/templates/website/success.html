@@ -1,0 +1,10 @@
+﻿{% extends 'website/base.html' %}
+{% block content %}
+<section class="section-padding" style="margin-top: 80px; text-align: center;">
+    <div class="container">
+        <h2 style="color: green;">Merci !</h2>
+        <p>Votre demande a bien ete envoyee. Notre equipe vous contactera sous 24h.</p>
+        <a href="{% url 'website:index' %}" class="btn" style="margin-top: 20px;">Retour a l'accueil</a>
+    </div>
+</section>
+{% endblock %}

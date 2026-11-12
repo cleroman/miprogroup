@@ -1,0 +1,52 @@
+{% extends 'website/dashboard/base.html' %}
+{% block page_title %}Gestion des Partenaires{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h3>Liste des Partenaires</h3>
+        <a href="{% url 'dashboard_partner_add' %}" class="btn"><i class="fas fa-plus"></i> Ajouter un partenaire</a>
+    </div>
+    <div class="card-body table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Logo</th>
+                    <th>Nom</th>
+                    <th>Rôle</th>
+                    <th>Site Web</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for partner in partners %}
+                <tr>
+                    <td>
+                        {% if partner.logo %}
+                            <img src="{{ partner.logo.url }}" style="height: 40px; max-width: 80px; object-fit: contain;">
+                        {% else %}
+                            <span style="color: #ccc;">Aucun</span>
+                        {% endif %}
+                    </td>
+                    <td><strong>{{ partner.name }}</strong></td>
+                    <td>{{ partner.role }}</td>
+                    <td>
+                        {% if partner.website %}
+                            <a href="{{ partner.website }}" target="_blank" style="color: var(--primary);"><i class="fas fa-link"></i> Visiter</a>
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td class="actions">
+                        <a href="{% url 'dashboard_partner_edit' partner.pk %}" class="btn btn-sm" style="background: #3b82f6;"><i class="fas fa-edit"></i> Modifier</a>
+                        <a href="{% url 'dashboard_partner_delete' partner.pk %}" class="btn btn-sm btn-danger" onclick="return confirm('Supprimer ce partenaire ?');"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="5" style="text-align: center; color: var(--text-light);">Aucun partenaire enregistré.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
