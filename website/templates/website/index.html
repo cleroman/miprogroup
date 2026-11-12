@@ -190,12 +190,17 @@
     </section>
 
     <!-- ABOUT (CEO) -->
+    
+    <!-- SECTION CEO (EN HAUT) -->
     <section class="section-padding about" id="apropos">
         <div class="container">
             <div class="about-content">
                 <div class="about-image">
-                    <!-- Photo statique du CEO -->
-                    <img src="{% static 'img/ceo.jpg' %}" alt="CEO MIPROgroup" style="width: 100%; height: 100%; object-fit: cover;">
+                    {% if ceo and ceo.image %}
+                        <img src="{{ ceo.image.url }}" alt="{{ ceo.name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                    {% else %}
+                        <img src="{% static 'img/ceo.jpg' %}" alt="CEO MIPROgroup" style="width: 100%; height: 100%; object-fit: cover;">
+                    {% endif %}
                 </div>
                 <div class="about-text">
                     <h2>Une Direction Technique d'Excellence</h2>
@@ -227,6 +232,7 @@
             </div>
         </div>
     </section>
+
 
     <!-- DIRECTION (Executifs) -->
     {% if executives %}
