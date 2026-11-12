@@ -113,8 +113,17 @@ class ProjectRequest(models.Model):
         return f"{self.name} - {self.domain}"
 
 class TeamMember(models.Model):
+    ROLE_CHOICES = (
+        ('PRESIDENT', 'Président / Fondateur'),
+        ('CEO', 'CEO'),
+        ('DG', 'Directeur Général'),
+        ('MEMBER', 'Membre d\'équipe'),
+    )
+    
     name = models.CharField(max_length=100, verbose_name="Nom complet")
     role = models.CharField(max_length=100, verbose_name="Fonction / Role")
+    role_type = models.CharField(max_length=20, choices=ROLE_CHOICES, default='MEMBER', verbose_name="Type de rôle (Hierarchie)")
+    
     image = models.ImageField(upload_to='team/', blank=True, null=True, verbose_name="Photo de profil")
     cv = models.FileField(upload_to='team/cv/', blank=True, null=True, verbose_name="CV (PDF)")
     
@@ -134,7 +143,7 @@ class TeamMember(models.Model):
     address3 = models.CharField(max_length=255, blank=True, null=True, verbose_name="Adresse 3")
 
     linkedin = models.URLField(blank=True, null=True, verbose_name="Lien LinkedIn")
-    is_ceo = models.BooleanField(default=False, verbose_name="Est-ce le CEO ?")
+    is_ceo = models.BooleanField(default=False, verbose_name="Est-ce le CEO ? (Ancien champ)")
     order = models.IntegerField(default=0, verbose_name="Ordre d'affichage")
 
     class Meta:
