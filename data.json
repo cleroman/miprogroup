@@ -3,8 +3,8 @@
   "model": "website.sitesettings",
   "pk": 1,
   "fields": {
-    "hero_title": "Bâtir l'avenir énergétique et infrastructurel de la RDC",
-    "hero_subtitle": "De l'ingénierie conseil à la réalisation de projets BTP et Énergies Renouvelables, MIPROgroup SARLU accompagne les particuliers, les entreprises et les institutions publiques dans leur développement durable.",
+    "hero_title": "BÃ¢tir l'avenir Ã©nergÃ©tique et infrastructurel de la RDC",
+    "hero_subtitle": "De l'ingÃ©nierie conseil Ã  la rÃ©alisation de projets BTP et Ã‰nergies Renouvelables, MIPROgroup SARLU accompagne les particuliers, les entreprises et les institutions publiques dans leur dÃ©veloppement durable.",
     "hero_video_url": "https://cdn.pixabay.com/video/2022/07/12/124204-729684643_large.mp4",
     "logo": "",
     "address": "16 eme Etage, Local C, Nouvelles Gal. Presidentielles, Q/Revolution, C/Gombe, Kinshasa, RDC",
@@ -30,8 +30,8 @@
   "model": "website.service",
   "pk": 1,
   "fields": {
-    "title": "Énergies Renouvelables",
-    "description": "Solutions solaires, efficacité énergétique et distribution d'énergie.",
+    "title": "Ã‰nergies Renouvelables",
+    "description": "Solutions solaires, efficacitÃ© Ã©nergÃ©tique et distribution d'Ã©nergie.",
     "image": "",
     "order": 1
   }
@@ -40,8 +40,8 @@
   "model": "website.service",
   "pk": 2,
   "fields": {
-    "title": "BTP & Aménagement",
-    "description": "Construction et rénovation durable.",
+    "title": "BTP & AmÃ©nagement",
+    "description": "Construction et rÃ©novation durable.",
     "image": "",
     "order": 2
   }
@@ -50,8 +50,8 @@
   "model": "website.service",
   "pk": 3,
   "fields": {
-    "title": "Ingénierie & IT",
-    "description": "Conseil technique et télécommunications.",
+    "title": "IngÃ©nierie & IT",
+    "description": "Conseil technique et tÃ©lÃ©communications.",
     "image": "",
     "order": 3
   }
@@ -71,8 +71,8 @@
   "pk": 1,
   "fields": {
     "name": "SOGETECH SARL",
-    "role": "Partenaire Légal & Énergétique",
-    "description": "Détenteur des licences de distribution d'énergie en RDC.",
+    "role": "Partenaire LÃ©gal & Ã‰nergÃ©tique",
+    "description": "DÃ©tenteur des licences de distribution d'Ã©nergie en RDC.",
     "website": "",
     "logo": "",
     "order": 0
@@ -84,7 +84,7 @@
   "fields": {
     "name": "FETERA ENERGY INC.",
     "role": "Partenaire Technologique",
-    "description": "Solutions d'ingénierie énergétique de pointe.",
+    "description": "Solutions d'ingÃ©nierie Ã©nergÃ©tique de pointe.",
     "website": "https://www.feteraenergy.com",
     "logo": "",
     "order": 0
@@ -96,7 +96,7 @@
   "fields": {
     "name": "JINKO SOLAR",
     "role": "Fabricant de panneaux PV",
-    "description": "Modules solaires certifiés Tier 1.",
+    "description": "Modules solaires certifiÃ©s Tier 1.",
     "website": "",
     "logo": "",
     "order": 0
@@ -119,7 +119,7 @@
   "pk": 5,
   "fields": {
     "name": "MEUBLIK",
-    "role": "Aménagement & Design",
+    "role": "AmÃ©nagement & Design",
     "description": "Mobilier professionnel.",
     "website": "",
     "logo": "",
@@ -134,7 +134,7 @@
     "role": "CEO",
     "image": "",
     "cv": "",
-    "details": "Ingenieur en construction né à MWENE DITU le 19-04-1991, etc vous pouvez le changer",
+    "details": "Ingenieur en construction nÃ© Ã  MWENE DITU le 19-04-1991, etc vous pouvez le changer",
     "comments": null,
     "email1": null,
     "email2": null,
