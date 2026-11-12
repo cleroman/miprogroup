@@ -1,11 +1,10 @@
-from cloudinary.models import CloudinaryField
 from django.db import models
 
 class SiteSettings(models.Model):
     hero_title = models.CharField(max_length=200, default="Batir l avenir energetique et infrastructurel de la RDC")
     hero_subtitle = models.TextField(default="De l ingenierie conseil a la realisation de projets BTP et Energies Renouvelables...")
     hero_video_url = models.URLField(default="https://cdn.pixabay.com/video/2022/07/12/124204-729684643_large.mp4")
-    logo = CloudinaryField( folder='site/', blank=True, null=True)
+    logo = models.ImageField(upload_to='site/', blank=True, null=True)
     
     address = models.TextField(default="16 eme Etage, Local C, Nouvelles Gal. Presidentielles, Q/Revolution, C/Gombe, Kinshasa, RDC")
     email1 = models.EmailField(default="mipro.ngoie@gmail.com")
@@ -38,7 +37,7 @@ class SiteSettings(models.Model):
 class Service(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
-    image = CloudinaryField( folder='services/', blank=True, null=True)
+    image = models.ImageField(upload_to='services/', blank=True, null=True)
     order = models.IntegerField(default=0, help_text="Ordre d affichage (0, 1, 2...)")
 
     class Meta:
@@ -53,7 +52,7 @@ class ProcessStep(models.Model):
     step_number = models.CharField(max_length=2, help_text="Ex: 01, 02...")
     title = models.CharField(max_length=100)
     description = models.TextField()
-    image = CloudinaryField( folder='process/', blank=True, null=True)
+    image = models.ImageField(upload_to='process/', blank=True, null=True)
     order = models.IntegerField(default=0)
 
     class Meta:
@@ -69,7 +68,7 @@ class Partner(models.Model):
     role = models.CharField(max_length=100, blank=True)
     description = models.TextField()
     website = models.URLField(blank=True, null=True)
-    logo = CloudinaryField( folder='partners/', blank=True, null=True, help_text="Uploadez le logo officiel du partenaire")
+    logo = models.ImageField(upload_to='partners/', blank=True, null=True, help_text="Uploadez le logo officiel du partenaire")
     order = models.IntegerField(default=0, help_text="Ordre d affichage")
     
     class Meta:
@@ -83,7 +82,7 @@ class Partner(models.Model):
 class News(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
-    image = CloudinaryField( folder='news/', blank=True, null=True)
+    image = models.ImageField(upload_to='news/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -104,7 +103,7 @@ class ProjectRequest(models.Model):
     description = models.TextField()
     budget = models.CharField(max_length=50, blank=True)
     timeline = models.CharField(max_length=50, blank=True)
-    document = CloudinaryField(type='raw', folder='requests/', blank=True, null=True)
+    document = models.FileField(upload_to='requests/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -116,7 +115,7 @@ class ProjectRequest(models.Model):
 class TeamMember(models.Model):
     name = models.CharField(max_length=100, verbose_name="Nom complet")
     role = models.CharField(max_length=100, verbose_name="Fonction / Role")
-    image = CloudinaryField( folder='team/', blank=True, null=True, verbose_name="Photo de profil")
+    image = models.ImageField(upload_to='team/', blank=True, null=True, verbose_name="Photo de profil")
     details = models.TextField(verbose_name="Details / Biographie (diplomes, experience...)")
     email = models.EmailField(blank=True, null=True, verbose_name="Email")
     phone = models.CharField(max_length=50, blank=True, null=True, verbose_name="Telephone")
