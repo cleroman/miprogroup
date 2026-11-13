@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import SiteSettings, Service, Partner, ProjectRequest, TeamMember, News
 
+
 def index(request):
-    # Si le formulaire de contact de la page d'accueil est soumis
+    # Gestion du formulaire de contact
     if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
@@ -15,7 +16,7 @@ def index(request):
             ProjectRequest.objects.create(
                 name=name,
                 email=email,
-                company=profile, # On stocke le profil ici
+                company=profile,
                 domain=domain,
                 description=message_text
             )
@@ -26,9 +27,14 @@ def index(request):
     settings_obj = SiteSettings.objects.first()
     services = Service.objects.all()
     partners = Partner.objects.all()
+    
+    # Logique de l'equipe
     ceo = TeamMember.objects.filter(role_type='CEO').first()
-    executives = TeamMember.objects.filter(role_type__in=['PRESIDENT', 'CEO', 'DG']).order_by('order')
-    team_members = TeamMember.objects.exclude(role_type__in=['CEO', 'DG', 'PRESIDENT']).order_by('order').order_by('order')
+    if not ceo:
+        ceo = TeamMember.objects.filter(is_ceo=True).first()
+        
+    directors = TeamMember.objects.filter(role_type__in=['DG', 'PRESIDENT', 'DIRECTEUR']).exclude(role_type='CEO').order_by('order')
+    team_members = TeamMember.objects.exclude(role_type__in=['CEO', 'DG', 'PRESIDENT', 'DIRECTEUR']).order_by('order')
     
     context = {
         'settings': settings_obj,
@@ -41,7 +47,6 @@ def index(request):
     return render(request, 'website/index.html', context)
 
 
-# LA FONCTION MANQUANTE :
 def demande_projet(request):
     # Cette vue redirige simplement vers l'accueil (qui contient le formulaire)
     return redirect('website:index')
