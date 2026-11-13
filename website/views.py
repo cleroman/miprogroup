@@ -28,7 +28,7 @@ def index(request):
     partners = Partner.objects.all()
     ceo = TeamMember.objects.filter(role_type='CEO').first()
     executives = TeamMember.objects.filter(role_type__in=['PRESIDENT', 'CEO', 'DG']).order_by('order')
-    team_members = TeamMember.objects.filter(role_type='MEMBER').order_by('order')
+    team_members = TeamMember.objects.exclude(role_type__in=['CEO', 'DG', 'PRESIDENT']).order_by('order').order_by('order')
     
     context = {
         'settings': settings_obj,
