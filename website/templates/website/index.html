@@ -91,6 +91,8 @@
             .hero h1 { font-size: 2.2rem; }
             .about-image { height: 300px; }
         }
+
+        .team-track { display: flex; }
     </style>
 </head>
 <body>
@@ -228,6 +230,7 @@
     </section>
     {% endif %}
 
+    
     <!-- SECTION EQUIPE -->
     {% if team_members %}
     <section class="section-padding" id="equipe" style="background-color: var(--light-gray);">
@@ -241,7 +244,7 @@
         <div class="team-marquee-wrapper">
             <div class="team-marquee">
                 <!-- Piste 1 -->
-                <div style="display: flex;">
+                <div class="team-track">
                     {% for member in team_members %}
                     <div class="team-card-small">
                         {% if member.image %}
@@ -249,6 +252,36 @@
                         {% else %}
                             <img src="{% static 'img/responsable.PNG' %}" alt="{{ member.name }}">
                         {% endif %}
+                        <h4 style="font-family: var(--font-title); margin-bottom: 5px;">{{ member.name }}</h4>
+                        <p style="color: var(--primary-blue); font-size: 0.85rem; font-weight: 600; margin-bottom: 10px;">{{ member.role }}</p>
+                        {% if member.cv %}
+                            <a href="{{ member.cv.url }}" target="_blank" style="font-size: 0.8rem; color: var(--text-muted);"><i class="fas fa-file-pdf"></i> CV</a>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                <!-- Piste 2 (Duplicata) -->
+                <div class="team-track">
+                    {% for member in team_members %}
+                    <div class="team-card-small">
+                        {% if member.image %}
+                            <img src="{{ member.image.url }}" alt="{{ member.name }}">
+                        {% else %}
+                            <img src="{% static 'img/responsable.PNG' %}" alt="{{ member.name }}">
+                        {% endif %}
+                        <h4 style="font-family: var(--font-title); margin-bottom: 5px;">{{ member.name }}</h4>
+                        <p style="color: var(--primary-blue); font-size: 0.85rem; font-weight: 600; margin-bottom: 10px;">{{ member.role }}</p>
+                        {% if member.cv %}
+                            <a href="{{ member.cv.url }}" target="_blank" style="font-size: 0.8rem; color: var(--text-muted);"><i class="fas fa-file-pdf"></i> CV</a>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
                         <h4 style="font-family: var(--font-title); margin-bottom: 5px;">{{ member.name }}</h4>
                         <p style="color: var(--primary-blue); font-size: 0.85rem; font-weight: 600; margin-bottom: 10px;">{{ member.role }}</p>
                         {% if member.cv %}
