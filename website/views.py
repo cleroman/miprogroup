@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import SiteSettings, Service, Partner, ProjectRequest, TeamMember, News
-
+from .models import SiteSettings, Service, Partner, ProjectRequest, TeamMember
 
 def index(request):
     # Gestion du formulaire de contact
@@ -33,7 +32,7 @@ def index(request):
     if not ceo:
         ceo = TeamMember.objects.filter(is_ceo=True).first()
         
-    directors = TeamMember.objects.filter(role_type__in=['DG', 'PRESIDENT', 'DIRECTEUR']).exclude(role_type='CEO').order_by('order')
+    directors = TeamMember.objects.filter(role_type__in=['DG', 'PRESIDENT', 'DIRECTEUR']).order_by('order')
     team_members = TeamMember.objects.exclude(role_type__in=['CEO', 'DG', 'PRESIDENT', 'DIRECTEUR']).order_by('order')
     
     context = {
@@ -46,7 +45,5 @@ def index(request):
     }
     return render(request, 'website/index.html', context)
 
-
 def demande_projet(request):
-    # Cette vue redirige simplement vers l'accueil (qui contient le formulaire)
     return redirect('website:index')
