@@ -67,6 +67,7 @@
         .team-marquee { display: flex; width: max-content; animation: scrollTeam 40s linear infinite; }
         .team-marquee:hover { animation-play-state: paused; }
         @keyframes scrollTeam { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .team-track { display: flex; }
         .team-card-small { width: 280px; background: white; border-radius: 8px; padding: 20px; text-align: center; margin-right: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
         .team-card-small img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px; border: 3px solid var(--primary-blue); }
 
@@ -91,8 +92,6 @@
             .hero h1 { font-size: 2.2rem; }
             .about-image { height: 300px; }
         }
-
-        .team-track { display: flex; }
     </style>
 </head>
 <body>
@@ -230,7 +229,6 @@
     </section>
     {% endif %}
 
-    
     <!-- SECTION EQUIPE -->
     {% if team_members %}
     <section class="section-padding" id="equipe" style="background-color: var(--light-gray);">
@@ -260,38 +258,8 @@
                     </div>
                     {% endfor %}
                 </div>
-                <!-- Piste 2 (Duplicata) -->
-                <div class="team-track">
-                    {% for member in team_members %}
-                    <div class="team-card-small">
-                        {% if member.image %}
-                            <img src="{{ member.image.url }}" alt="{{ member.name }}">
-                        {% else %}
-                            <img src="{% static 'img/responsable.PNG' %}" alt="{{ member.name }}">
-                        {% endif %}
-                        <h4 style="font-family: var(--font-title); margin-bottom: 5px;">{{ member.name }}</h4>
-                        <p style="color: var(--primary-blue); font-size: 0.85rem; font-weight: 600; margin-bottom: 10px;">{{ member.role }}</p>
-                        {% if member.cv %}
-                            <a href="{{ member.cv.url }}" target="_blank" style="font-size: 0.8rem; color: var(--text-muted);"><i class="fas fa-file-pdf"></i> CV</a>
-                        {% endif %}
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </section>
-    {% endif %}
-
-                        <h4 style="font-family: var(--font-title); margin-bottom: 5px;">{{ member.name }}</h4>
-                        <p style="color: var(--primary-blue); font-size: 0.85rem; font-weight: 600; margin-bottom: 10px;">{{ member.role }}</p>
-                        {% if member.cv %}
-                            <a href="{{ member.cv.url }}" target="_blank" style="font-size: 0.8rem; color: var(--text-muted);"><i class="fas fa-file-pdf"></i> CV</a>
-                        {% endif %}
-                    </div>
-                    {% endfor %}
-                </div>
                 <!-- Piste 2 -->
-                <div style="display: flex;">
+                <div class="team-track">
                     {% for member in team_members %}
                     <div class="team-card-small">
                         {% if member.image %}
