@@ -35,7 +35,8 @@ class SiteSettings(models.Model):
 
 class Service(models.Model):
     title = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.TextField(verbose_name="Details sur l'entreprise")
+    service_details = models.TextField(blank=True, null=True, verbose_name="Details sur leur service")
     image = models.ImageField(upload_to='services/', blank=True, null=True)
     order = models.IntegerField(default=0, help_text="Ordre d affichage (0, 1, 2...)")
 
@@ -50,7 +51,8 @@ class Service(models.Model):
 class ProcessStep(models.Model):
     step_number = models.CharField(max_length=2, help_text="Ex: 01, 02...")
     title = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.TextField(verbose_name="Details sur l'entreprise")
+    service_details = models.TextField(blank=True, null=True, verbose_name="Details sur leur service")
     image = models.ImageField(upload_to='process/', blank=True, null=True)
     order = models.IntegerField(default=0)
 
@@ -65,7 +67,8 @@ class ProcessStep(models.Model):
 class Partner(models.Model):
     name = models.CharField(max_length=100)
     role = models.CharField(max_length=100, blank=True)
-    description = models.TextField()
+    description = models.TextField(verbose_name="Details sur l'entreprise")
+    service_details = models.TextField(blank=True, null=True, verbose_name="Details sur leur service")
     website = models.URLField(blank=True, null=True)
     logo = models.ImageField(upload_to='partners/', blank=True, null=True, help_text="Uploadez le logo officiel du partenaire")
     order = models.IntegerField(default=0, help_text="Ordre d affichage")
@@ -99,7 +102,8 @@ class ProjectRequest(models.Model):
     phone = models.CharField(max_length=50, blank=True)
     domain = models.CharField(max_length=100)
     location = models.CharField(max_length=100, blank=True)
-    description = models.TextField()
+    description = models.TextField(verbose_name="Details sur l'entreprise")
+    service_details = models.TextField(blank=True, null=True, verbose_name="Details sur leur service")
     budget = models.CharField(max_length=50, blank=True)
     timeline = models.CharField(max_length=50, blank=True)
     document = models.FileField(upload_to='requests/', blank=True, null=True)

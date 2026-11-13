@@ -106,6 +106,24 @@
             .hero h1 { font-size: 2.2rem; }
             .about-image { height: 300px; }
         }
+
+        /* --- TOOLTIP PARTENAIRES --- */
+        .partner-item { position: relative; flex-shrink: 0; }
+        .partner-details {
+            display: none; position: fixed; width: 320px; background: var(--dark-blue);
+            color: var(--white); padding: 20px; border-radius: 10px; box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+            z-index: 99999; transform: translate(-50%, -100%) translateY(-16px); transition: opacity 0.2s ease;
+            pointer-events: none;
+        }
+        .partner-details.active { display: block; opacity: 1; pointer-events: auto; }
+        .partner-details::after {
+            content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+            border: 9px solid transparent; border-top-color: var(--dark-blue);
+        }
+        .partner-details h4 { color: var(--white); font-family: 'Playfair Display', serif; margin-bottom: 5px; }
+        .partner-details .partner-role { color: #93c5fd; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 10px; }
+        .partner-details p { font-size: 0.8rem; color: rgba(255,255,255,0.8); margin-bottom: 8px; line-height: 1.4; }
+        .partner-details a { color: #93c5fd; font-weight: 600; text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -315,33 +333,72 @@
     </section>
     {% endif %}
 
-    <!-- PARTENAIRES -->
+    
+    <!-- PARTENAIRES (DYNAMIQUE) -->
     <section class="section-padding partners" id="partenaires">
         <div class="container">
             <div class="text-center">
                 <h2 class="section-title">Nos Partenaires Stratégiques</h2>
-                <p style="margin-bottom: 40px;">Parce que les grands projets nécessitent les meilleures compétences et une conformité totale.</p>
+                <p style="margin-bottom: 40px;">Parce que les grands projets nécessitent les meilleures compétences et une conformité totale. Survolez un partenaire pour découvrir son rôle.</p>
             </div>
         </div>
+        
         <div class="partners-marquee-wrapper">
             <div class="partners-marquee">
+                <!-- Piste 1 -->
                 <div class="partners-track">
-                    <div class="partner-logo"><img src="{% static 'img/sogetec.PNG' %}" alt="Sogetec"></div>
-                    <div class="partner-logo"><img src="{% static 'img/fetera.PNG' %}" alt="Fetera"></div>
-                    <div class="partner-logo"><img src="{% static 'img/jinko.PNG' %}" alt="Jinko"></div>
-                    <div class="partner-logo"><img src="{% static 'img/longi.png' %}" alt="Longi"></div>
-                    <div class="partner-logo"><img src="{% static 'img/meublik.jpeg' %}" alt="Meublik"></div>
+                    {% for partner in partners %}
+                    <div class="partner-item">
+                        <div class="partner-logo">
+                            {% if partner.logo %}
+                                <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" style="max-height: 50px; max-width: 140px; object-fit: contain;">
+                            {% else %}
+                                <span style="font-weight:bold; color: var(--dark-blue);">{{ partner.name }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="partner-details">
+                            <h4>{{ partner.name }}</h4>
+                            <div class="partner-role">{{ partner.role }}</div>
+                            <p><strong>L'entreprise :</strong> {{ partner.description }}</p>
+                            {% if partner.service_details %}
+                                <p><strong>Leurs services :</strong> {{ partner.service_details }}</p>
+                            {% endif %}
+                            {% if partner.website %}
+                                <a href="{{ partner.website }}" target="_blank" rel="noopener">Visiter leur site →</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
+                <!-- Piste 2 (Duplicata pour le defilement) -->
                 <div class="partners-track">
-                    <div class="partner-logo"><img src="{% static 'img/sogetec.PNG' %}" alt="Sogetec"></div>
-                    <div class="partner-logo"><img src="{% static 'img/fetera.PNG' %}" alt="Fetera"></div>
-                    <div class="partner-logo"><img src="{% static 'img/jinko.PNG' %}" alt="Jinko"></div>
-                    <div class="partner-logo"><img src="{% static 'img/longi.png' %}" alt="Longi"></div>
-                    <div class="partner-logo"><img src="{% static 'img/meublik.jpeg' %}" alt="Meublik"></div>
+                    {% for partner in partners %}
+                    <div class="partner-item">
+                        <div class="partner-logo">
+                            {% if partner.logo %}
+                                <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" style="max-height: 50px; max-width: 140px; object-fit: contain;">
+                            {% else %}
+                                <span style="font-weight:bold; color: var(--dark-blue);">{{ partner.name }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="partner-details">
+                            <h4>{{ partner.name }}</h4>
+                            <div class="partner-role">{{ partner.role }}</div>
+                            <p><strong>L'entreprise :</strong> {{ partner.description }}</p>
+                            {% if partner.service_details %}
+                                <p><strong>Leurs services :</strong> {{ partner.service_details }}</p>
+                            {% endif %}
+                            {% if partner.website %}
+                                <a href="{{ partner.website }}" target="_blank" rel="noopener">Visiter leur site →</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </section>
+
 
     <!-- FOOTER -->
     <footer>
@@ -372,5 +429,28 @@
             </div>
         </div>
     </footer>
+
+    <div class="partner-tooltip" id="partnerTooltip" style="display:none; position:fixed; z-index:99999;"></div>
+    <script>
+        const tooltip = document.getElementById('partnerTooltip');
+        document.querySelectorAll('.partner-item').forEach(item => {
+            const details = item.querySelector('.partner-details');
+            if (!details) return;
+            item.addEventListener('mouseenter', () => {
+                const rect = item.getBoundingClientRect();
+                let left = rect.left + rect.width / 2;
+                left = Math.max(160 + 10, Math.min(window.innerWidth - 160 - 10, left));
+                tooltip.innerHTML = details.innerHTML;
+                tooltip.style.display = 'block';
+                tooltip.style.left = left + 'px';
+                tooltip.style.top = rect.top + 'px';
+                tooltip.className = 'partner-details active';
+            });
+            item.addEventListener('mouseleave', () => {
+                tooltip.style.display = 'none';
+            });
+        });
+    </script>
+
 </body>
 </html>
