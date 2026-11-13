@@ -334,7 +334,8 @@
     {% endif %}
 
     
-    <!-- PARTENAIRES (DYNAMIQUE) -->
+    
+    <!-- PARTENAIRES (100% DYNAMIQUE) -->
     <section class="section-padding partners" id="partenaires">
         <div class="container">
             <div class="text-center">
@@ -353,7 +354,7 @@
                             {% if partner.logo %}
                                 <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" style="max-height: 50px; max-width: 140px; object-fit: contain;">
                             {% else %}
-                                <span style="font-weight:bold; color: var(--dark-blue);">{{ partner.name }}</span>
+                                <span style="font-weight:bold; color: var(--dark-blue); font-size: 1rem;">{{ partner.name }}</span>
                             {% endif %}
                         </div>
                         <div class="partner-details">
@@ -370,7 +371,7 @@
                     </div>
                     {% endfor %}
                 </div>
-                <!-- Piste 2 (Duplicata pour le defilement) -->
+                <!-- Piste 2 (Duplicata pour le defilement infini) -->
                 <div class="partners-track">
                     {% for partner in partners %}
                     <div class="partner-item">
@@ -378,7 +379,7 @@
                             {% if partner.logo %}
                                 <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" style="max-height: 50px; max-width: 140px; object-fit: contain;">
                             {% else %}
-                                <span style="font-weight:bold; color: var(--dark-blue);">{{ partner.name }}</span>
+                                <span style="font-weight:bold; color: var(--dark-blue); font-size: 1rem;">{{ partner.name }}</span>
                             {% endif %}
                         </div>
                         <div class="partner-details">
@@ -398,6 +399,7 @@
             </div>
         </div>
     </section>
+
 
 
     <!-- FOOTER -->
