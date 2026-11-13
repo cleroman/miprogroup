@@ -35,7 +35,7 @@ def index(request):
         'services': services,
         'partners': partners,
         'ceo': ceo,
-        'executives': executives,
+        'directors': directors,
         'team_members': team_members,
     }
     return render(request, 'website/index.html', context)

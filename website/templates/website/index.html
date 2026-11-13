@@ -244,34 +244,37 @@
     </section>
 
 
-    <!-- DIRECTION (Executifs) -->
-    {% if executives %}
+    
+    <!-- SECTION DIRECTION (Directeurs) -->
+    {% if directors %}
     <section class="section-padding" id="direction" style="background-color: var(--white);">
         <div class="container">
             <div class="text-center">
                 <h2 class="section-title">Notre Direction</h2>
-                <p>Les visages qui guident notre vision au quotidien.</p>
+                <p>Les experts qui encadrent nos équipes.</p>
             </div>
             <div class="expertise-grid" style="margin-top: 40px; justify-content: center;">
-                {% for exec in executives %}
+                {% for director in directors %}
                 <div class="team-card-exec">
-                    {% if exec.image %}
-                        <img src="{{ exec.image.url }}" alt="{{ exec.name }}">
+                    {% if director.image %}
+                        <img src="{{ director.image.url }}" alt="{{ director.name }}">
                     {% else %}
-                        <img src="{% static 'img/responsable.PNG' %}" alt="{{ exec.name }}">
+                        <img src="{% static 'img/responsable.PNG' %}" alt="{{ director.name }}">
                     {% endif %}
-                    <h3>{{ exec.name }}</h3>
-                    <p style="color: var(--primary-blue); font-weight: 600; font-size: 1.1rem; margin-bottom: 15px;">{{ exec.role }}</p>
-                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 15px;">{{ exec.details|truncatewords:20 }}</p>
+                    <h3>{{ director.name }}</h3>
+                    <p style="color: var(--primary-blue); font-weight: 600; font-size: 1.1rem; margin-bottom: 15px;">{{ director.role }}</p>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 15px;">{{ director.details|truncatewords:20 }}</p>
                     <div style="margin-top: 20px; font-size: 1.2rem;">
-                        {% if exec.cv %}<a href="{{ exec.cv.url }}" target="_blank" style="color: var(--primary-blue); margin: 0 10px;" title="CV"><i class="fas fa-file-pdf"></i></a>{% endif %}
-                        {% if exec.linkedin %}<a href="{{ exec.linkedin }}" target="_blank" style="color: var(--primary-blue); margin: 0 10px;"><i class="fab fa-linkedin"></i></a>{% endif %}
+                        {% if director.cv %}<a href="{{ director.cv.url }}" target="_blank" style="color: var(--primary-blue); margin: 0 10px;" title="CV"><i class="fas fa-file-pdf"></i></a>{% endif %}
+                        {% if director.linkedin %}<a href="{{ director.linkedin }}" target="_blank" style="color: var(--primary-blue); margin: 0 10px;"><i class="fab fa-linkedin"></i></a>{% endif %}
                     </div>
                 </div>
                 {% endfor %}
             </div>
         </div>
     </section>
+    {% endif %}
+
     {% endif %}
 
     <!-- EQUIPE (Defilement) -->

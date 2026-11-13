@@ -121,6 +121,7 @@ class TeamMember(models.Model):
         ('PRESIDENT', 'Président / Fondateur'),
         ('CEO', 'CEO'),
         ('DG', 'Directeur Général'),
+        ('DIRECTEUR', 'Directeur'),
         ('MEMBER', 'Membre d\'équipe'),
     )
     
